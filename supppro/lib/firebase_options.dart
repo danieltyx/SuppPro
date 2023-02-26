@@ -66,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '810640539949',
     projectId: 'windy-gizmo-378702',
     storageBucket: 'windy-gizmo-378702.appspot.com',
-    iosClientId: '810640539949-eqre9f60pbmjabjlepah57bd2os40jjk.apps.googleusercontent.com',
+    iosClientId:
+        '810640539949-eqre9f60pbmjabjlepah57bd2os40jjk.apps.googleusercontent.com',
     iosBundleId: 'com.example.supppro',
   );
 
@@ -76,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '810640539949',
     projectId: 'windy-gizmo-378702',
     storageBucket: 'windy-gizmo-378702.appspot.com',
-    iosClientId: '810640539949-eqre9f60pbmjabjlepah57bd2os40jjk.apps.googleusercontent.com',
+    iosClientId:
+        '810640539949-eqre9f60pbmjabjlepah57bd2os40jjk.apps.googleusercontent.com',
     iosBundleId: 'com.example.supppro',
   );
 }

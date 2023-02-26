@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>383915876356-up2f6ancmhn1l0u8ftghi3bbg4ri62n2.apps.googleusercontent.com</string>
+	<string>810640539949-eqre9f60pbmjabjlepah57bd2os40jjk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.383915876356-up2f6ancmhn1l0u8ftghi3bbg4ri62n2</string>
+	<string>com.googleusercontent.apps.810640539949-eqre9f60pbmjabjlepah57bd2os40jjk</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCuXia16GdUyrjZp0nQKYXwxhhooR3r9Tk</string>
+	<string>AIzaSyDzp9WmZLmtCSYkIYl7scMAUYZ8aWoJGRQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>383915876356</string>
+	<string>810640539949</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.supppro</string>
 	<key>PROJECT_ID</key>
-	<string>supppro-55862</string>
+	<string>windy-gizmo-378702</string>
 	<key>STORAGE_BUCKET</key>
-	<string>supppro-55862.appspot.com</string>
+	<string>windy-gizmo-378702.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:383915876356:ios:6ffd05852acbe7f2491551</string>
+	<string>1:810640539949:ios:13edea3e5b9687d27ed3a4</string>
 </dict>
 </plist>
