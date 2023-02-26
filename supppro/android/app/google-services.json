@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "810640539949",
+    "project_id": "windy-gizmo-378702",
+    "storage_bucket": "windy-gizmo-378702.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810640539949:android:de27f36f21f831487ed3a4",
+        "android_client_info": {
+          "package_name": "com.example.supppro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810640539949-2ga52g9uaj9srvebe85bv2emdel07dlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCag53iPu4dEib8BdlW8g5i7KV-k3rU8BQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810640539949-2ga52g9uaj9srvebe85bv2emdel07dlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
