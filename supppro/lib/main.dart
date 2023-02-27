@@ -10,10 +10,12 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(ChangeNotifierProvider(
-    create: (context) => ApplicationState(),
-    builder: ((context, child) => const MyApp()),
-  ));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => ApplicationState(),
+      builder: ((context, child) => const MyApp()),
+    ),
+  ]));
 }
 
 // Add GoRouter configuration outside the App class
@@ -75,6 +77,12 @@ final _router = GoRouter(
           ],
         ),
         GoRoute(
+          path: 'scan-barcode',
+          builder: (context, state) {
+            return scanScreen();
+          },
+        ),
+        GoRoute(
           path: 'profile',
           builder: (context, state) {
             return ProfileScreen(
@@ -103,7 +111,7 @@ class MyApp extends StatelessWidget {
       title: 'Supo Pro',
       theme: FlexThemeData.light(scheme: FlexScheme.damask),
       darkTheme: FlexThemeData.dark(scheme: FlexScheme.damask),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       routerConfig: _router,
       // routes: {
       //  LogInScreen.routeName: (ctx) => LogInScreen(),
