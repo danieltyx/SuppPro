@@ -73,6 +73,7 @@ class _scanScreenState extends State<scanScreen> {
                         .findDocument(_scanBarcode)
                         .then((snapshot) {
                       print(snapshot.toString());
+                      print(snapshot?.data()!['Product_Name']);
                     });
                   }
                 },
