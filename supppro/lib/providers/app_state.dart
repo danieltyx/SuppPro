@@ -37,20 +37,6 @@ class ApplicationState extends ChangeNotifier {
     });
   }
 
-  Future<String> findSuppItem(String barcode) async {
-    if (!_loggedIn) {
-      throw Exception('Must be logged in');
-    }
-    SuppItem suppItem;
-    final DocumentReference documentReference =
-        FirebaseFirestore.instance.collection('supps').doc(barcode);
-    print("### Test");
-    final DocumentSnapshot documentSnapshot = await documentReference.get();
-    print("DSLD ${documentSnapshot.data()}");
-    final String stringValue = documentSnapshot.get('DSLD_ID');
-    return stringValue;
-  }
-
   Future<DocumentSnapshot<Map<String, dynamic>>?> findDocument(
       String docId) async {
     final collectionName = "supps";
@@ -60,7 +46,6 @@ class ApplicationState extends ChangeNotifier {
             .doc(docId)
             .get();
 
-    // If the document snapshot exists, return it
     if (snapshot.exists) {
       return snapshot;
     }
