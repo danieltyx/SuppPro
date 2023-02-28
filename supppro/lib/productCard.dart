@@ -6,72 +6,106 @@ import 'package:supppro/providers/suppItem.dart';
 class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SuppItem _suppItem = Provider.of<SuppItems>(context, listen: false)
+    SuppItem suppItem = Provider.of<SuppItems>(context, listen: false)
         .currentSuppItem as SuppItem;
+    final marketStatusColor = suppItem.marketStatus == 'Available'
+        ? Colors.red
+        : Colors.green; // set color based on marketStatus
+
     return Card(
-      color: Colors.grey[200],
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildCategoryText('Product Information', Colors.orange),
-            SizedBox(height: 8.0),
-            _buildText('Product Name', _suppItem.productName),
-            _buildText('Product Type', _suppItem.productType),
-            _buildText('Brand Name', _suppItem.brandName),
-            _buildText('Market Status', _suppItem.marketStatus),
-            _buildText('Net Contents', _suppItem.netContents),
-            SizedBox(height: 16.0),
-            _buildCategoryText('Supplement Facts', Colors.blue),
-            SizedBox(height: 8.0),
-            _buildText('Serving Size', _suppItem.servingSize),
-            _buildText('Suggested Use', _suppItem.suggestedUse),
-            _buildText('Supplement Form', _suppItem.supplementForm),
-            SizedBox(height: 16.0),
-            _buildCategoryText('Additional Information', Colors.green),
-            SizedBox(height: 8.0),
-            _buildText('Barcode', _suppItem.barCode),
-            _buildText('DSLD ID', _suppItem.dSLDId),
-            _buildText('Date Entered into DSLD', _suppItem.dateEnteredIntoDSLD),
-            _buildText('URL', _suppItem.url),
+            SizedBox(height: 100),
+            Text(suppItem.productName,
+                style: TextStyle(
+                  fontSize: 36,
+                  color: Theme.of(context).colorScheme.primary,
+                )
+                //Theme.of(context).textTheme.headline6,
+                ),
+            const SizedBox(height: 8),
+            Row(children: [
+              _buildInfoBox(
+                context,
+                'Brand',
+                suppItem.brandName,
+              ),
+              const SizedBox(width: 8),
+              _buildInfoBox(context, 'Net Contents', suppItem.netContents),
+            ]),
+            const SizedBox(height: 8),
+            Row(children: [
+              _buildInfoBox(context, 'Serving Size', suppItem.servingSize),
+              const SizedBox(width: 8),
+              _buildInfoBox(context, 'Product Type', suppItem.productType),
+              const SizedBox(width: 8)
+            ]),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                _buildInfoBox(
+                    context, 'Supplement Form', suppItem.supplementForm),
+                const SizedBox(width: 8),
+                _buildInfoBox(context, 'Market Status', suppItem.marketStatus,
+                    marketStatusColor),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Suggested Use',
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              suppItem.suggestedUse,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildText(String label, String text) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label.toUpperCase(),
-          style: TextStyle(
-            color: Colors.grey[700],
-            fontWeight: FontWeight.bold,
-            fontSize: 12.0,
+  Widget _buildInfoBox(BuildContext context, String label, String value,
+      [Color boxcolor = Colors.grey]) {
+    return Container(
+      decoration: BoxDecoration(
+        color: boxcolor,
+        //Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 4,
+            offset: Offset(0, 2),
           ),
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          text,
-          style: TextStyle(
-            color: Colors.grey[800],
-            fontSize: 14.0,
+        ],
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: Theme.of(context).textTheme.caption?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCategoryText(String text, Color color) {
-    return Text(
-      text.toUpperCase(),
-      style: TextStyle(
-        color: color,
-        fontWeight: FontWeight.bold,
-        fontSize: 16.0,
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ],
       ),
     );
   }
