@@ -53,6 +53,18 @@ class _scanScreenState extends State<scanScreen> {
     });
   }
 
+  //scan barcode asynchronously
+  // Future barcodeScanning() async {
+  //   try {
+  //     String barcode = (await BarcodeScanner.scan()) as String;
+  //     setState(() => this.barcode = barcode);
+  //   } on FormatException {
+  //     setState(() => this.barcode = 'Nothing captured.');
+  //   } catch (e) {
+  //     setState(() => this.barcode = 'Unknown error: $e');
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -8,6 +8,7 @@ import 'package:supppro/providers/suppItem.dart';
 import 'package:supppro/screens/home_screen.dart';
 import 'package:supppro/screens/scan_screen.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -122,6 +123,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('es'), // Spanish
+      ],
       title: 'Supo Pro',
       theme: FlexThemeData.light(scheme: FlexScheme.damask),
       darkTheme: FlexThemeData.dark(scheme: FlexScheme.damask),

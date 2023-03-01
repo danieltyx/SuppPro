@@ -2,8 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:supppro/providers/suppItem.dart';
+import 'package:translator/translator.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  static List<String> lang_list = <String>[
+    'es',
+    'zh-cn',
+    'fr',
+    'de',
+    'it',
+    'ja',
+    'la',
+    'plR'
+  ];
+  var _needTranslation = false;
+  String translated_txt = "";
+  String dropdownValue = lang_list.first;
+
   @override
   Widget build(BuildContext context) {
     SuppItem suppItem = Provider.of<SuppItems>(context, listen: false)
@@ -64,6 +84,54 @@ class ProductCard extends StatelessWidget {
               suppItem.suggestedUse,
               style: Theme.of(context).textTheme.bodyText2,
             ),
+            Row(
+              children: [
+                Text("Translate to: "),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: const Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  underline: Container(
+                    height: 2,
+                    color: Colors.orange,
+                  ),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _needTranslation = true;
+                      dropdownValue = value!;
+                    });
+
+                    final translator = GoogleTranslator();
+                    translator
+                        .translate(suppItem.suggestedUse,
+                            from: 'en', to: '$dropdownValue')
+                        .then((result) {
+                      setState(() {
+                        translated_txt = result.toString();
+                      });
+
+                      print(translated_txt);
+                    });
+                    // getTranslation(suppItem.suggestedUse, dropdownValue)
+                    //     .then((val) {
+                    //   translated_txt = val.toString() as String;
+                    //   print(translated_txt);
+                    // });
+                    print(dropdownValue);
+                  },
+                  items:
+                      lang_list.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            (translated_txt == "" && _needTranslation)
+                ? CircularProgressIndicator()
+                : Text(translated_txt)
           ],
         ),
       ),
