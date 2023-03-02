@@ -2,6 +2,7 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:supppro/barcode/barcode_list_scanner_controller.dart';
 import 'package:supppro/productCard.dart';
 import 'package:supppro/providers/app_state.dart';
 import 'package:supppro/providers/suppItem.dart';
@@ -108,7 +109,14 @@ final _router = GoRouter(routes: [
           path: 'scan-barcode',
           builder: (context, state) {
             return scanScreen();
-          }),
+          },
+          routes: [
+            GoRoute(
+                path: 'camera-page',
+                builder: (context, state) {
+                  return BarcodeListScannerWithController();
+                })
+          ]),
       GoRoute(path: 'view-detail', builder: (context, state) => ProductCard()),
     ],
   ),
