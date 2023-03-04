@@ -7,16 +7,20 @@ class ProductPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.grey[200],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildText('Product Name', _suppItem.productName),
-          _buildText('Brand Name', _suppItem.brandName),
-          _buildText('Barcode', _suppItem.barCode),
-          _buildText('DSLD ID', _suppItem.dSLDId),
-        ],
+    return Container(
+      width: 300, // specify the desired width
+      height: 200,
+      child: Card(
+        color: Colors.grey[200],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildText('Product Name', _suppItem.productName),
+            _buildText('Brand Name', _suppItem.brandName),
+            _buildText('Barcode', _suppItem.barCode),
+            _buildText('DSLD ID', _suppItem.dSLDId),
+          ],
+        ),
       ),
     );
   }
@@ -30,7 +34,7 @@ class ProductPreview extends StatelessWidget {
           style: TextStyle(
             color: Colors.grey[700],
             fontWeight: FontWeight.bold,
-            fontSize: 12.0,
+            fontSize: 16.0,
           ),
         ),
         SizedBox(height: 4.0),
@@ -38,7 +42,7 @@ class ProductPreview extends StatelessWidget {
           text,
           style: TextStyle(
             color: Colors.grey[800],
-            fontSize: 14.0,
+            fontSize: 21.0,
           ),
         ),
       ],

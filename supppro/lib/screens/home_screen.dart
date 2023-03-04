@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import '../providers/app_state.dart';
 import '../src/authentication.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as html;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,14 +22,14 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               context.push('/scan-barcode');
             },
-            child: Text("Scan")),
+            child: Text("Search")),
         Consumer<ApplicationState>(
           builder: (context, appState, _) => AuthFunc(
               loggedIn: appState.loggedIn,
               signOut: () {
                 FirebaseAuth.instance.signOut();
               }),
-        ),
+        )
       ]),
     );
   }

@@ -7,6 +7,7 @@ import 'package:supppro/productCard.dart';
 import 'package:supppro/providers/app_state.dart';
 import 'package:supppro/providers/suppItem.dart';
 import 'package:supppro/screens/home_screen.dart';
+import 'package:supppro/screens/landing_screen.dart';
 import 'package:supppro/screens/scan_screen.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,45 +40,16 @@ void main() {
 final _router = GoRouter(routes: [
   GoRoute(
     path: '/',
-    builder: (context, state) => const HomeScreen(),
+    builder: (context, state) => const landingScreen(),
     routes: [
+      GoRoute(
+        path: 'home-screen',
+        builder: (context, state) => HomeScreen(),
+      ),
       GoRoute(
         path: 'sign-in',
         builder: (context, state) {
-          return SignInScreen(
-            actions: [
-              ForgotPasswordAction(((context, email) {
-                final uri = Uri(
-                  path: '/sign-in/forgot-password',
-                  queryParameters: <String, String?>{
-                    'email': email,
-                  },
-                );
-                context.push(uri.toString());
-              })),
-              AuthStateChangeAction(((context, state) {
-                if (state is SignedIn || state is UserCreated) {
-                  var user = (state is SignedIn)
-                      ? state.user
-                      : (state as UserCreated).credential.user;
-                  if (user == null) {
-                    return;
-                  }
-                  if (state is UserCreated) {
-                    user.updateDisplayName(user.email!.split('@')[0]);
-                  }
-                  if (!user.emailVerified) {
-                    user.sendEmailVerification();
-                    const snackBar = SnackBar(
-                        content: Text(
-                            'Please check your email to verify your email address'));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                  context.pushReplacement('/');
-                }
-              })),
-            ],
-          );
+          return SingUpLogInScreen();
         },
         routes: [
           GoRoute(
@@ -121,6 +93,43 @@ final _router = GoRouter(routes: [
     ],
   ),
 ]);
+
+SignInScreen SingUpLogInScreen() {
+  return SignInScreen(
+    actions: [
+      ForgotPasswordAction(((context, email) {
+        final uri = Uri(
+          path: '/sign-in/forgot-password',
+          queryParameters: <String, String?>{
+            'email': email,
+          },
+        );
+        context.push(uri.toString());
+      })),
+      AuthStateChangeAction(((context, state) {
+        if (state is SignedIn || state is UserCreated) {
+          var user = (state is SignedIn)
+              ? state.user
+              : (state as UserCreated).credential.user;
+          if (user == null) {
+            return;
+          }
+          if (state is UserCreated) {
+            user.updateDisplayName(user.email!.split('@')[0]);
+          }
+          if (!user.emailVerified) {
+            user.sendEmailVerification();
+            const snackBar = SnackBar(
+                content: Text(
+                    'Please check your email to verify your email address'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+          context.pushReplacement('/scan-barcode');
+        }
+      })),
+    ],
+  );
+}
 
 // end of GoRouter configuration
 
