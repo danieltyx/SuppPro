@@ -45,7 +45,7 @@ class _landingScreenState extends State<landingScreen> {
           children: const [
             MyPage1Widget(),
             MyPage2Widget(),
-            // MyPage3Widget(),
+            MyPage3Widget(),
           ],
         )
       ]),
@@ -165,15 +165,15 @@ class MyPage2Widget extends StatelessWidget {
         width: 390,
         height: 844,
         child: Stack(children: <Widget>[
-          // Positioned(
-          //     top: 850,
-          //     left: 350,
-          //     child: Column(children: [
-          //       Text(
-          //         ">>>",
-          //         style: TextStyle(color: Colors.grey, fontSize: 20),
-          //       ),
-          //     ])),
+          Positioned(
+              top: 850,
+              left: 350,
+              child: Column(children: [
+                Text(
+                  ">>>",
+                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                ),
+              ])),
           Positioned(
               top: 100,
               left: 30,
@@ -346,71 +346,63 @@ class MyPage2Widget extends StatelessWidget {
 
             return appState.loggedIn
                 ? scanScreen()
-                : Positioned(
-                    child: Column(
-                      children: [
-                        Spacer(
-                          flex: 15,
-                        ),
-                        Center(
-                          child: Row(
-                            children: [
-                              Spacer(
-                                flex: 5,
-                              ),
-                              Center(
-                                child: ElevatedButton(
+                : Column(
+                    children: [
+                      Spacer(),
+                      Center(
+                        child: Row(
+                          children: [
+                            Center(
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    !loggedIn
+                                        ? context.push('/sign-in')
+                                        : FirebaseAuth.instance.signOut();
+                                    ;
+                                  },
+                                  child: !loggedIn
+                                      ? const Text('SIGN IN')
+                                      : const Text('Logout')),
+                            ),
+                            Visibility(
+                              visible: loggedIn,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 24, bottom: 8),
+                                child: StyledButton(
                                     onPressed: () {
-                                      !loggedIn
-                                          ? context.push('/sign-in')
-                                          : FirebaseAuth.instance.signOut();
-                                      ;
+                                      context.push('/profile');
                                     },
-                                    child: !loggedIn
-                                        ? const Text('SIGN IN')
-                                        : const Text('Logout')),
+                                    child: const Text('Profile')),
                               ),
-                              Visibility(
-                                visible: loggedIn,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 24, bottom: 8),
-                                  child: StyledButton(
-                                      onPressed: () {
-                                        context.push('/profile');
-                                      },
-                                      child: const Text('Profile')),
-                                ),
-                              ),
-                              Spacer(),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                        Spacer(),
-                      ],
-                    ),
+                      ),
+                      Spacer(),
+                    ],
                   );
           })
         ]));
   }
 }
 
-// class MyPage3Widget extends StatelessWidget {
-//   const MyPage3Widget({super.key});
+class MyPage3Widget extends StatelessWidget {
+  const MyPage3Widget({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Consumer<ApplicationState>(builder: (context, appState, _)
-//         // =>SingUpLogInScreen()
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ApplicationState>(builder: (context, appState, _)
+        // =>SingUpLogInScreen()
 
-//         {
-//       return appState.loggedIn
-//           ? scanScreen()
-//           : AuthFunc(
-//               loggedIn: appState.loggedIn,
-//               signOut: () {
-//                 FirebaseAuth.instance.signOut();
-//               });
-//     });
-//   }
-// }
+        {
+      return appState.loggedIn
+          ? scanScreen()
+          : AuthFunc(
+              loggedIn: appState.loggedIn,
+              signOut: () {
+                FirebaseAuth.instance.signOut();
+              });
+    });
+  }
+}
