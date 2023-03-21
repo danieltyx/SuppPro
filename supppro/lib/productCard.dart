@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:supppro/providers/app_state.dart';
 import 'package:supppro/providers/suppItem.dart';
 import 'package:translator/translator.dart';
 
@@ -140,6 +141,8 @@ class _ProductCardState extends State<ProductCard> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Provider.of<SuppItems>(context, listen: false).addItem(suppItem);
+          Provider.of<ApplicationState>(context, listen: false)
+              .addRecordtoUser(suppItem);
         },
         child: Icon(Icons.add),
       ),

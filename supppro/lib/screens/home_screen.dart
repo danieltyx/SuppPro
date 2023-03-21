@@ -11,8 +11,26 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as html;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  List<SuppItem> suppdata = [];
+  void didChangeDependencies() async {
+    try {
+      suppdata = await Provider.of<ApplicationState>(context, listen: false)
+          .fetchSupplementData();
+    } catch (error) {
+      print(error.toString());
+    }
+    print(suppdata.length);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +51,7 @@ class HomeScreen extends StatelessWidget {
         Container(
           height: 400,
           child: GridView.builder(
-            itemCount: Provider.of<SuppItems>(context).suppItems.length,
+            itemCount: suppdata.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 10,
@@ -45,13 +63,9 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(Provider.of<SuppItems>(context)
-                        .suppItems[index]
-                        .productName),
+                    Text(suppdata[index].productName),
                     const SizedBox(height: 10),
-                    Text(Provider.of<SuppItems>(context)
-                        .suppItems[index]
-                        .productType),
+                    Text(suppdata[index].productType),
                   ],
                 ),
               );
