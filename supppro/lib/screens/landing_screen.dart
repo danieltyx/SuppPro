@@ -45,7 +45,7 @@ class _landingScreenState extends State<landingScreen> {
           children: const [
             MyPage1Widget(),
             MyPage2Widget(),
-            MyPage3Widget(),
+            // MyPage3Widget(),
           ],
         )
       ]),
@@ -348,10 +348,13 @@ class MyPage2Widget extends StatelessWidget {
                 ? scanScreen()
                 : Column(
                     children: [
-                      Spacer(),
+                      Spacer(
+                        flex: 17,
+                      ),
                       Center(
                         child: Row(
                           children: [
+                            Spacer(),
                             Center(
                               child: ElevatedButton(
                                   onPressed: () {
@@ -387,22 +390,22 @@ class MyPage2Widget extends StatelessWidget {
   }
 }
 
-class MyPage3Widget extends StatelessWidget {
-  const MyPage3Widget({super.key});
+// class MyPage3Widget extends StatelessWidget {
+//   const MyPage3Widget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<ApplicationState>(builder: (context, appState, _)
-        // =>SingUpLogInScreen()
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<ApplicationState>(builder: (context, appState, _)
+//         // =>SingUpLogInScreen()
 
-        {
-      return appState.loggedIn
-          ? scanScreen()
-          : AuthFunc(
-              loggedIn: appState.loggedIn,
-              signOut: () {
-                FirebaseAuth.instance.signOut();
-              });
-    });
-  }
-}
+//         {
+//       return appState.loggedIn
+//           ? scanScreen()
+//           : AuthFunc(
+//               loggedIn: appState.loggedIn,
+//               signOut: () {
+//                 FirebaseAuth.instance.signOut();
+//               });
+//     });
+//   }
+// }

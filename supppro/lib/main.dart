@@ -160,3 +160,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//UI: Give an image instruction when enter the barcode
+//gpt but with careful wording 
+// Prompt + profile : the nature of supps 
