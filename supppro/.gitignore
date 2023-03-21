@@ -1,4 +1,4 @@
-lib/key.dart
+lib/GPTkey.dart
 # Miscellaneous
 *.class
 *.log

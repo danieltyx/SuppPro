@@ -1,3 +1,5 @@
+// import 'dart:js';
+
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +8,7 @@ import 'package:supppro/barcode/barcode_list_scanner_controller.dart';
 import 'package:supppro/productCard.dart';
 import 'package:supppro/providers/app_state.dart';
 import 'package:supppro/providers/suppItem.dart';
+import 'package:supppro/screens/gptscreen.dart';
 import 'package:supppro/screens/home_screen.dart';
 import 'package:supppro/screens/landing_screen.dart';
 import 'package:supppro/screens/scan_screen.dart';
@@ -90,6 +93,7 @@ final _router = GoRouter(routes: [
                 })
           ]),
       GoRoute(path: 'view-detail', builder: (context, state) => ProductCard()),
+      GoRoute(path: 'gpt-query', builder: (context, state) => gptScreen()),
     ],
   ),
 ]);

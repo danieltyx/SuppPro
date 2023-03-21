@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:supppro/screens/home_screen.dart';
 import 'package:supppro/screens/scan_screen.dart';
 
 import '../main.dart';
@@ -345,7 +346,7 @@ class MyPage2Widget extends StatelessWidget {
             bool loggedIn = appState.loggedIn;
 
             return appState.loggedIn
-                ? scanScreen()
+                ? HomeScreen()
                 : Column(
                     children: [
                       Spacer(

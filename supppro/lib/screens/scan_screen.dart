@@ -19,6 +19,7 @@ import 'package:supppro/productCard.dart';
 import '../productPreview.dart';
 import '../providers/app_state.dart';
 import '../src/authentication.dart';
+import 'package:supppro/GPTkey.dart';
 
 class scanScreen extends StatefulWidget {
   const scanScreen({super.key});
@@ -50,7 +51,6 @@ class _scanScreenState extends State<scanScreen> {
   var _isNotFound = false;
   var _justStarted = true;
   final myController = TextEditingController();
-
   @override
   void didChangeDependencies() {
     setState(() {
@@ -125,6 +125,11 @@ class _scanScreenState extends State<scanScreen> {
             const SizedBox(
               height: 20,
             ),
+            ElevatedButton(
+                onPressed: () {
+                  context.push('/gpt-query');
+                },
+                child: Text("Test GPT")),
             _isLoading
                 ? _isNotFound
                     ? Text(

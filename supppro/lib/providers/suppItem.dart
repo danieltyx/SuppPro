@@ -75,6 +75,11 @@ class SuppItems extends ChangeNotifier {
     return _currentSuppItem;
   }
 
+  void addItem(SuppItem suppitem) {
+    _suppItems.add(suppitem);
+    // print(_suppItems.length);
+  }
+
   void setCurrentItem(SuppItem si) {
     _currentSuppItem = si;
   }
