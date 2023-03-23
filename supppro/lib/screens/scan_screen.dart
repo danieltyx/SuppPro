@@ -98,20 +98,20 @@ class _scanScreenState extends State<scanScreen> {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              "Or enter the barcode here:",
-              style: TextStyle(fontSize: 24),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: myController,
-              keyboardType: TextInputType.number,
-            ),
-            Padding(
-              padding: EdgeInsets.all(50),
-              child: ElevatedButton(
+            // const Text(
+            //   "Or enter the barcode here:",
+            //   style: TextStyle(fontSize: 16),
+            // ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: myController,
+                    keyboardType: TextInputType.number,
+                  ),
+                ),
+                SizedBox(width: 50),
+                ElevatedButton(
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     setState(() {
@@ -120,16 +120,13 @@ class _scanScreenState extends State<scanScreen> {
                     CheckBarCode(_scanBarcode);
                     fillSupp(context);
                   },
-                  child: Text('Submit')),
+                  child: Text('Enter'),
+                ),
+              ],
             ),
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  context.push('/gpt-query');
-                },
-                child: Text("Test GPT")),
             _isLoading
                 ? _isNotFound
                     ? Text(
@@ -152,11 +149,6 @@ class _scanScreenState extends State<scanScreen> {
                       ],
                     );
                   }),
-            TextButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                child: Text("Sign Out"))
           ],
         ),
       ]),

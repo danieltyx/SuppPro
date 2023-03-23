@@ -172,9 +172,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   direction: DismissDirection.endToStart,
                   onDismissed: (direction) {
                     setState(() {
-                      _medicines.removeAt(index - 1);
                       Provider.of<ApplicationState>(context, listen: false)
-                          .deleteMedFromDB(_medicines[index - 1]);
+                          .deleteMedFromDB(_medicines[index]);
+                      _medicines.removeAt(index);
                     });
                   },
                   background: Container(
