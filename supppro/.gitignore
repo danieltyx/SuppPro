@@ -1,4 +1,5 @@
 lib/GPTkey.dart
+lib/firebase_options.dart
 # Miscellaneous
 *.class
 *.log
