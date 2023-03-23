@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       suppdata = await Provider.of<ApplicationState>(context, listen: false)
           .fetchSupplementData();
+
       _medicines = await Provider.of<ApplicationState>(context, listen: false)
           .fetchMedData();
       setState(() {
@@ -100,20 +101,46 @@ class _HomeScreenState extends State<HomeScreen> {
                 childAspectRatio: 2,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Provider.of<SuppItems>(context, listen: false)
-                        .setCurrentItem(suppdata[index]);
-                    context.push('/view-detail');
+                return Dismissible(
+                  key: Key(suppdata[index].barCode),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    setState(() {
+                      suppdata.remove(suppdata[index]);
+                      Provider.of<ApplicationState>(context, listen: false)
+                          .DeleteSuppData(index);
+                    });
                   },
-                  child: Card(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  background: Container(
+                    color: Colors.red,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(suppdata[index].productName),
-                        const SizedBox(height: 10),
-                        Text(suppdata[index].productType),
+                        Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 16.0,
+                        ),
                       ],
+                    ),
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Provider.of<SuppItems>(context, listen: false)
+                          .setCurrentItem(suppdata[index]);
+                      context.push('/view-detail');
+                    },
+                    child: Card(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(suppdata[index].productName),
+                          const SizedBox(height: 10),
+                          Text(suppdata[index].productType),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -140,9 +167,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 childAspectRatio: 3.0,
               ),
               itemBuilder: (context, index) {
-                return Card(
-                  child: Center(
-                    child: Text(_medicines[index]),
+                return Dismissible(
+                  key: Key(_medicines[index]),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    setState(() {
+                      _medicines.removeAt(index - 1);
+                      Provider.of<ApplicationState>(context, listen: false)
+                          .deleteMedFromDB(_medicines[index - 1]);
+                    });
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 16.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                  child: Card(
+                    child: Center(
+                      child: Text(_medicines[index]),
+                    ),
                   ),
                 );
               },

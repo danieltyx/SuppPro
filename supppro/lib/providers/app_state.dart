@@ -102,6 +102,25 @@ class ApplicationState extends ChangeNotifier {
     }).onError((e, _) => print("Error writing document: $e"));
   }
 
+  Future<void> DeleteSuppData(int index) async {
+    if (!_loggedIn) {
+      throw Exception('Must be logged in');
+    }
+    var userDocRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    var docSnapshot = await userDocRef.get();
+    List myList = docSnapshot.data()!['Supps'];
+    myList.removeAt(index);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'Supps': myList,
+    }).onError((e, _) => print("Error writing document: $e"));
+  }
+
   Future<List<SuppItem>> fetchSupplementData() async {
     final snapshot = await FirebaseFirestore.instance
         .collection('users')
@@ -176,6 +195,23 @@ class ApplicationState extends ChangeNotifier {
       'Meds': FieldValue.arrayUnion([medName])
     }).onError((e, _) => print("Error writing document: $e"));
     // print(medName);
+  }
+
+  Future<void> deleteMedFromDB(String medName) async {
+    if (!_loggedIn) {
+      throw Exception('Must be logged in');
+    }
+    var userDocRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    var doc = await userDocRef.get();
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'Meds': FieldValue.arrayRemove([medName])
+    }).onError((e, _) => print("Error writing document: $e"));
   }
 
   Future<void> addPersonalGoals(String goals) async {

@@ -55,6 +55,8 @@ dependencies:
   go_router_flow: ^6.2.0
   is_first_run: ^1.0.0
   chat_gpt_sdk: ^2.0.6
+  flutter_linkify: ^5.0.2
+  url_launcher: ^6.1.10
 
 
 
