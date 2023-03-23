@@ -75,9 +75,14 @@ class SuppItems extends ChangeNotifier {
     return _currentSuppItem;
   }
 
-  void addItem(SuppItem suppitem) {
+  int addItem(SuppItem suppitem) {
+    for (var item in _suppItems) {
+      if (item.barCode == suppitem.barCode) {
+        return 0;
+      }
+    }
     _suppItems.add(suppitem);
-    // print(_suppItems.length);
+    return 1;
   }
 
   void setCurrentItem(SuppItem si) {

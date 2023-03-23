@@ -29,7 +29,7 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     SuppItem suppItem = Provider.of<SuppItems>(context, listen: false)
         .currentSuppItem as SuppItem;
-    final marketStatusColor = suppItem.marketStatus == 'Available'
+    final marketStatusColor = suppItem.marketStatus == 'Off Market'
         ? Colors.red
         : Colors.green; // set color based on marketStatus
 
@@ -140,7 +140,25 @@ class _ProductCardState extends State<ProductCard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<SuppItems>(context, listen: false).addItem(suppItem);
+          int res =
+              Provider.of<SuppItems>(context, listen: false).addItem(suppItem);
+          if (res == 1) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Added successfully'),
+                backgroundColor: Colors.green,
+              ),
+            );
+          }
+          if (res == 0) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                    '${suppItem.productName} is already in your collection.'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
           Provider.of<ApplicationState>(context, listen: false)
               .addRecordtoUser(suppItem);
         },

@@ -8,9 +8,11 @@ import 'package:supppro/barcode/barcode_list_scanner_controller.dart';
 import 'package:supppro/productCard.dart';
 import 'package:supppro/providers/app_state.dart';
 import 'package:supppro/providers/suppItem.dart';
+import 'package:supppro/screens/goal_rank_screen.dart';
 import 'package:supppro/screens/gptscreen.dart';
 import 'package:supppro/screens/home_screen.dart';
 import 'package:supppro/screens/landing_screen.dart';
+import 'package:supppro/screens/purpose_selection_screen.dart';
 import 'package:supppro/screens/scan_screen.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -94,6 +96,9 @@ final _router = GoRouter(routes: [
           ]),
       GoRoute(path: 'view-detail', builder: (context, state) => ProductCard()),
       GoRoute(path: 'gpt-query', builder: (context, state) => gptScreen()),
+      GoRoute(
+          path: 'goal-select',
+          builder: (context, state) => PurposeSelectionPage()),
     ],
   ),
 ]);

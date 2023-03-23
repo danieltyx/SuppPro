@@ -60,6 +60,7 @@ class ApplicationState extends ChangeNotifier {
     }
     Map<String, dynamic> data = {
       'Supps': [],
+      'Meds': [],
     };
     await FirebaseFirestore.instance
         .collection('users')
@@ -113,7 +114,10 @@ class ApplicationState extends ChangeNotifier {
         snapshot.data() as Map<String, dynamic>;
     // print(userData.values.expand((l) => l).runtimeType);
     // print((userData.values.expand((l) => l)));
-    var dataList = userData.values.expand((l) => l);
+    // print(userData['Supps']);
+    // print(userData['Meds']);
+    List<dynamic> suppdata = userData['Supps'];
+    var dataList = suppdata;
     List<SuppItem> suppItemList = dataList.map((data) {
       // print(data);
       return SuppItem(
@@ -132,5 +136,62 @@ class ApplicationState extends ChangeNotifier {
       );
     }).toList();
     return suppItemList;
+  }
+
+  Future<List<String>> fetchMedData() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    if (!snapshot.exists) {
+      return [];
+    }
+    final Map<String, dynamic> userData =
+        snapshot.data() as Map<String, dynamic>;
+
+    List<dynamic> medsdata = userData['Meds'] == null ? [""] : userData['Meds'];
+    var dataList = medsdata;
+
+    List<String> medItemList = dataList.map((data) {
+      return data as String;
+    }).toList();
+    return medItemList;
+  }
+
+  Future<void> addMedtoDB(String medName) async {
+    if (!_loggedIn) {
+      throw Exception('Must be logged in');
+    }
+    var userDocRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    var doc = await userDocRef.get();
+    if (!doc.exists) {
+      createPersonalBox();
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'Meds': FieldValue.arrayUnion([medName])
+    }).onError((e, _) => print("Error writing document: $e"));
+    // print(medName);
+  }
+
+  Future<void> addPersonalGoals(String goals) async {
+    if (!_loggedIn) {
+      throw Exception('Must be logged in');
+    }
+    var userDocRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    var doc = await userDocRef.get();
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'Goals': goals}).onError(
+            (e, _) => print("Error writing document: $e"));
+    // print(medName);
   }
 }
