@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(children: [
           Row(children: [
             Text(
-              "Supplments",
+              "Supplements",
               style: TextStyle(fontSize: 22),
             ),
             Spacer()
@@ -133,13 +133,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       context.push('/view-detail');
                     },
                     child: Card(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(suppdata[index].productName),
-                          const SizedBox(height: 10),
-                          Text(suppdata[index].productType),
-                        ],
+                      child: Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(suppdata[index].productName),
+                            const SizedBox(height: 10),
+                            Text(
+                              suppdata[index].productType,
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -157,48 +162,51 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: GridView.builder(
-              itemCount: _medicines.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10.0,
-                crossAxisSpacing: 10.0,
-                childAspectRatio: 3.0,
+          Container(
+            height: 300,
+            child: Expanded(
+              child: GridView.builder(
+                itemCount: _medicines.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 2,
+                ),
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    key: Key(_medicines[index]),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      setState(() {
+                        Provider.of<ApplicationState>(context, listen: false)
+                            .deleteMedFromDB(_medicines[index]);
+                        _medicines.removeAt(index);
+                      });
+                    },
+                    background: Container(
+                      color: Colors.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 16.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    child: Card(
+                      child: Center(
+                        child: Text(_medicines[index]),
+                      ),
+                    ),
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  key: Key(_medicines[index]),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (direction) {
-                    setState(() {
-                      Provider.of<ApplicationState>(context, listen: false)
-                          .deleteMedFromDB(_medicines[index]);
-                      _medicines.removeAt(index);
-                    });
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 16.0,
-                        ),
-                      ],
-                    ),
-                  ),
-                  child: Card(
-                    child: Center(
-                      child: Text(_medicines[index]),
-                    ),
-                  ),
-                );
-              },
             ),
           ),
           Spacer(),
@@ -273,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Row(
             children: [
-              Text("Lookup/Add Supplments"),
+              Text("Lookup/Add Supplements"),
               ActionButton(
                 onPressed: () => context.push('/scan-barcode'),
                 icon: const Icon(Icons.health_and_safety),
@@ -294,3 +302,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+// add empty
+// OTC window box
+// check in the middle 
+//color bar 

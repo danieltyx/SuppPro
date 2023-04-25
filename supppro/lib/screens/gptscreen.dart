@@ -49,7 +49,7 @@ class _gptScreenState extends State<gptScreen> {
     List<String> suppnames = mysupps.map((e) => e.productName).toList();
     //please give me a yes-or-no answer and then explain in short whether there exist any drug interactions among them: Vitamin C,  Vitamin B12, Prenatal Multi +DHA, CEfprozil, and ibuprofen. I will not take it as medical advice and I will consult with my doctor.
     String myprompt =
-        "Question:Whether these drugs interact among themselves: ${mymeds.toString().substring(1, mymeds.toString().length - 1)}, ${suppnames.toString().substring(1, suppnames.toString().length - 1)}. Please give me a yes-or-no answer, rate the risk from 1 to 10 and  use one sentence to explain the reason behind. I will not take it as medical advice and I will consult with my doctor.";
+        "Question:Whether these drugs interact among themselves: ${mymeds.toString().substring(1, mymeds.toString().length - 1)}, ${suppnames.toString().substring(1, suppnames.toString().length - 1)}.Show me the probability of interaction as percentage. Rate the risk from 1 to 10 and  use one sentence to explain the reason behind. Disclaimer: I will not take it as medical advice and I will consult with my doctor.";
     // print("###$myprompt");
     promptQuestion =
         "Whether these drugs interact among themselves: ${mymeds.toString().substring(1, mymeds.toString().length - 1)}, ${suppnames.toString().substring(1, suppnames.toString().length - 1)}";
