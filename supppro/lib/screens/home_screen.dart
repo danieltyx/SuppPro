@@ -306,4 +306,8 @@ class _HomeScreenState extends State<HomeScreen> {
 // add empty
 // OTC window box
 // check in the middle 
-//color bar 
+//color bar - color coding for supplements
+//speaker button
+//graphics 
+//goals icon with medinces
+
