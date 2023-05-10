@@ -12,7 +12,6 @@ import 'package:supppro/providers/app_state.dart';
 import 'package:supppro/providers/suppItem.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 
 class gptScreen extends StatefulWidget {
   const gptScreen({Key? key}) : super(key: key);
@@ -22,13 +21,10 @@ class gptScreen extends StatefulWidget {
 }
 
 class _gptScreenState extends State<gptScreen> {
-  final FlutterTts tts = FlutterTts();
-  String tts_text = "To begin, please click the Check button.";
-
   late OpenAI openAI;
   ChatCTResponse? mResponse;
   bool _isloadnig = false;
-  String response = "To begin, please click the \"Check\" button.";
+  String response = "To begin, please click the \"Start\" button.";
   String prompt = "empty";
   String promptQuestion = "empty";
   @override
@@ -40,8 +36,6 @@ class _gptScreenState extends State<gptScreen> {
         token: gpt_api_key,
         baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 30)),
         isLog: true);
-    tts.setLanguage('en');
-    tts.setSpeechRate(0.4);
     super.initState();
   }
 
@@ -81,7 +75,7 @@ class _gptScreenState extends State<gptScreen> {
       // print("${mResponse?.toJson()}");
       // print("@@@@@ $response");
     });
-    tts_text = response;
+
     return response;
   }
 
@@ -163,12 +157,7 @@ class _gptScreenState extends State<gptScreen> {
                       color: Colors.blue,
                       decoration: TextDecoration.underline),
                 ),
-              ),
-              TextButton(
-                  onPressed: () {
-                    tts.speak(tts_text);
-                  },
-                  child: Text('Speak'))
+              )
             ],
           ),
         ),
