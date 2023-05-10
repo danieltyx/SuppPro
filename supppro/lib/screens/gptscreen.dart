@@ -164,28 +164,16 @@ class _gptScreenState extends State<gptScreen> {
                       decoration: TextDecoration.underline),
                 ),
               ),
-              Center(
-                child: Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          tts.speak(tts_text);
-                        },
-                        icon: (Icon(Icons.volume_up))),
-                    IconButton(
-                        onPressed: () {
-                          tts.stop();
-                        },
-                        icon: (Icon(Icons.stop)))
-                  ],
-                ),
-              )
+              TextButton(
+                  onPressed: () {
+                    tts.speak(tts_text);
+                  },
+                  child: Text('Speak'))
             ],
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButton: Row(
         children: [
           FloatingActionButton(
@@ -207,7 +195,6 @@ class _gptScreenState extends State<gptScreen> {
                     backgroundColor: Colors.white,
                   )
                 : const Text("Check"),
-            mini: false,
             backgroundColor: response!.toLowerCase().contains('yes')
                 ? Colors.red
                 : Colors.green,
