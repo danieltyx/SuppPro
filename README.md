@@ -1,5 +1,4 @@
 # SuppPro
-“All-in-one solution for researching, purchasing, and managing over-the-counter drugs and supplements”
 
 Daniel Tian 
 **danieltian.yx@gmail.com**
