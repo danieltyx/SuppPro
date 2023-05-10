@@ -57,7 +57,6 @@ dependencies:
   chat_gpt_sdk: ^2.0.6
   flutter_linkify: ^5.0.2
   url_launcher: ^6.1.10
-  flutter_tts: ^3.6.3
  
 
 
