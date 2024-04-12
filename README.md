@@ -3,7 +3,6 @@
 Daniel Tian 
 **danieltian.yx@gmail.com**
 
-![SuppPro Pre 001](https://github.com/danieltyx/SuppPro/assets/58199853/c0433a06-f3f2-4629-840b-fb0f5e67d4bf)
 ![SuppPro Pre 002](https://github.com/danieltyx/SuppPro/assets/58199853/2b91c51b-ca5f-496c-a6df-c7317252facd)
 ![SuppPro Pre 003](https://github.com/danieltyx/SuppPro/assets/58199853/21430e37-4cc9-4f7a-b078-2c7b5bfd2b18)
 ![SuppPro Pre 004](https://github.com/danieltyx/SuppPro/assets/58199853/70a6a949-dadb-4b8f-b994-41985d0a7fb4)
